@@ -1,5 +1,7 @@
 <template>
-  <table class="table table-responsive table-bordered">
+  <table
+    class="table table-striped table-responsive table-bordered text-center"
+  >
     <caption>
       Расписание группы
       {{
@@ -20,15 +22,8 @@
     </thead>
     <tbody>
       <tr v-for="time of $options.LESSON_TIMES" :key="time">
-        <td
-          class="text-center"
-          v-for="(lesson, idx) of filter_lessons_by(time)"
-          :key="idx"
-        >
-          <template v-if="idx == 0">
-            {{ time }}
-          </template>
-          <template v-else> {{ lesson }} </template>
+        <td v-for="(lesson, idx) of filter_lessons_by(time)" :key="idx">
+          {{ idx === 0 ? time : lesson }}
         </td>
       </tr>
     </tbody>
