@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-striped table-responsive table-bordered">
+  <table class="table table-responsive table-bordered">
     <caption>
       Расписание группы
       {{
@@ -19,6 +19,7 @@
       </tr>
     </thead>
     <tbody>
+      <!-- TODO оптимизировать -->
       <tr v-for="time of LESSON_TIMES" :key="time">
         <td class="text-center" v-for="day of iter_days()" :key="day[1]">
           <template v-if="day[1] == 0">
@@ -72,7 +73,7 @@ export default {
         return lesson.time == time && lesson.day == day;
       });
       if (lesson === undefined) {
-        return "-";
+        return "";
       }
       return `${lesson.subject.name}`;
     },
