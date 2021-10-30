@@ -13,21 +13,22 @@
     <thead>
       <tr>
         <th>Время</th>
-        <th v-for="(day, index) of WeekDays" :key="index">
+        <th v-for="(day, index) of $options.WeekDays" :key="index">
           <b> {{ day[0] }}</b>
         </th>
       </tr>
     </thead>
     <tbody>
-      <!-- TODO оптимизировать -->
-      <tr v-for="time of LESSON_TIMES" :key="time">
-        <td class="text-center" v-for="day of iter_days()" :key="day[1]">
-          <template v-if="day[1] == 0">
+      <tr v-for="time of $options.LESSON_TIMES" :key="time">
+        <td
+          class="text-center"
+          v-for="(lesson, idx) of filter_lessons_by(time)"
+          :key="idx"
+        >
+          <template v-if="idx == 0">
             {{ time }}
           </template>
-          <template v-else>
-            {{ find_lesson(time, day[1]) }}
-          </template>
+          <template v-else> {{ lesson }} </template>
         </td>
       </tr>
     </tbody>
@@ -37,6 +38,8 @@
 <script>
 import { LESSON_TIMES, WeekDays } from "../models/enums.js";
 export default {
+  WeekDays: WeekDays,
+  LESSON_TIMES: LESSON_TIMES,
   props: {
     group: {
       type: String,
@@ -51,13 +54,6 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      WeekDays: WeekDays,
-      LESSON_TIMES: LESSON_TIMES,
-    };
-  },
-
   methods: {
     get_parity_from_number(number) {
       return {
@@ -65,8 +61,22 @@ export default {
         2: "знаменатель",
       }[number];
     },
-    iter_days() {
-      return [["абуз", 0]].concat(Array.from(this.WeekDays));
+    // TODO сделать нормальный алгоритм
+    filter_lessons_by(time) {
+      const filteredLessons = this.lessons.filter(
+        (lesson) => lesson.time == time
+      );
+      const daysNumbers = this.get_week_days_numbers();
+      const lessonsToRender = [];
+      for (let day of daysNumbers) {
+        let foundLesson = filteredLessons.find((lesson) => lesson.day == day);
+        if (foundLesson) {
+          lessonsToRender.push(foundLesson.subject.name);
+        } else {
+          lessonsToRender.push("");
+        }
+      }
+      return [null].concat(lessonsToRender);
     },
     find_lesson(time, day) {
       const lesson = this.lessons.find((lesson) => {
@@ -76,6 +86,9 @@ export default {
         return "";
       }
       return `${lesson.subject.name}`;
+    },
+    get_week_days_numbers() {
+      return Array.from(this.$options.WeekDays).map((item) => item[1]);
     },
   },
 };
