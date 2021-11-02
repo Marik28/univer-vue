@@ -79,16 +79,31 @@ session storage,
       <div v-else>
         <p class="text-center">Заданий нет</p>
       </div>
+      <h3 class="text-center">
+        Полезные ссылки для группы {{ selected_group }}
+      </h3>
+      <useful-links-table
+        v-if="has_subjects"
+        :group="selected_group"
+        :subjects="subjects"
+      />
+      <p class="text-center" v-else>Ссылок нет</p>
     </div>
   </main>
 </template>
 
 <script>
-import { fetch_groups, fetch_schedule, fetch_assignments } from "./api/api.js";
+import {
+  fetch_groups,
+  fetch_schedule,
+  fetch_assignments,
+  fetch_subjects,
+} from "./api/api.js";
 import { Parity } from "./models/enums.js";
 import ScheduleTable from "./components/ScheduleTable.vue";
 import AssignmentsTable from "./components/AssignmentsTable.vue";
 import NavbarComponent from "./components/NavbarComponent.vue";
+import UsefulLinksTable from "./components/UsefulLinksTable.vue";
 
 export default {
   name: "App",
@@ -96,6 +111,7 @@ export default {
     ScheduleTable,
     AssignmentsTable,
     NavbarComponent,
+    UsefulLinksTable,
   },
   data() {
     return {
@@ -103,6 +119,7 @@ export default {
       selected_group: null,
       lessons: [],
       assignments: [],
+      subjects: [],
       show_schedule: true,
       selected_parity: Parity.NUMERATOR,
       error_message: null,
@@ -150,9 +167,14 @@ export default {
     get_assignments: async function () {
       this.assignments = await fetch_assignments(this.selected_group);
     },
+
+    get_subjects: async function () {
+      this.subjects = await fetch_subjects(this.selected_group);
+    },
     update_data: async function () {
       await this.get_schedule();
       await this.get_assignments();
+      await this.get_subjects();
     },
   },
   computed: {
@@ -169,6 +191,12 @@ export default {
      */
     has_lessons() {
       return this.lessons.length > 0;
+    },
+    /**
+     * @returns {Boolean}
+     */
+    has_subjects() {
+      return this.subjects.length > 0;
     },
   },
 };

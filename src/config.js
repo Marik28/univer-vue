@@ -3,4 +3,5 @@ export default {
   groups_endpoint: "/groups/",
   lessons_endpoint: "/lessons/",
   assignments_endpoint: "/assignments/",
+  subjects_endpoint: "/subjects/",
 };

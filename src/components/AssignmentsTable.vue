@@ -18,7 +18,7 @@
     </thead>
     <tbody>
       <tr v-for="(assignment, index) of assignments" :key="index">
-        <td>{{ index }}</td>
+        <td>{{ index + 1 }}</td>
         <td>{{ assignment.subject.name }}</td>
         <td>{{ assignment.title }}</td>
         <td>

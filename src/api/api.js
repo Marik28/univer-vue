@@ -1,6 +1,6 @@
 import config from "../config";
 
-export { fetch_groups, fetch_schedule, fetch_assignments };
+export { fetch_groups, fetch_schedule, fetch_assignments, fetch_subjects };
 
 function build_url(endpoint, params) {
   const url = new URL(config.base_api_url + endpoint);
@@ -46,6 +46,22 @@ async function fetch_schedule(group, subgroup = 3, parity = 3) {
 
 async function fetch_assignments(group) {
   const url = build_url(config.assignments_endpoint, {
+    group: group,
+  });
+  const response = await fetch(url, { headers: default_headers });
+  const data = await response.json();
+  return data;
+}
+
+/**
+ *
+ * @param {string} group
+ * @param {boolean} with_links_only
+ * @returns {Array} list_of_subjects
+ */
+async function fetch_subjects(group, with_links_only = true) {
+  const url = build_url(config.subjects_endpoint, {
+    with_links_only: with_links_only,
     group: group,
   });
   const response = await fetch(url, { headers: default_headers });
