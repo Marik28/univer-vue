@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-responsive table-bordered">
+  <table class="table table-striped table-responsive table-bordered">
     <caption>
       Полезные ссылки для группы
       {{
