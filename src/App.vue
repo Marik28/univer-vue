@@ -129,7 +129,7 @@ export default {
   },
   created: async function () {
     this.groups = await fetch_groups();
-    if (this.groups) {
+    if (this.groups.length > 0) {
       this.selected_group = this.groups[0].name;
       await this.update_data();
     }
