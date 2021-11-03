@@ -62,7 +62,6 @@ session storage,
         <div v-if="has_lessons && show_schedule">
           <!-- TODO подумать, как исправить ref и нужно ли -->
           <schedule-table
-            ref="scheduleTable"
             :parity="selected_parity"
             :group="selected_group"
             :lessons="lessons"
