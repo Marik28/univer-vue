@@ -47,17 +47,15 @@
         Расписание группы {{ selected_group }} на
         {{ get_parity_from_number(selected_parity) }}
       </h3>
-      <transition name="fade">
-        <div v-if="has_lessons">
-          <!-- TODO подумать, как исправить ref и нужно ли -->
-          <schedule-table
-            :parity="selected_parity"
-            :group="selected_group"
-            :lessons="lessons"
-          />
-        </div>
-        <div class="text-center" v-else>Расписания нет</div>
-      </transition>
+      <div v-if="has_lessons">
+        <!-- TODO подумать, как исправить ref и нужно ли -->
+        <schedule-table
+          :parity="selected_parity"
+          :group="selected_group"
+          :lessons="lessons"
+        />
+      </div>
+      <div class="text-center" v-else>Расписания нет</div>
       <h3 class="text-center">Задания для группы {{ selected_group }}</h3>
       <div v-if="has_assignments">
         <assignments-table :group="selected_group" :assignments="assignments" />
@@ -181,13 +179,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-</style>
