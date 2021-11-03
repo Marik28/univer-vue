@@ -41,16 +41,6 @@
           </div>
         </form>
       </div>
-
-      <div>
-        <button
-          v-if="has_lessons"
-          class="btn btn-secondary mx-2"
-          @click.prevent="toggle_show_schedule"
-        >
-          {{ show_schedule ? "Скрыть расписание" : "Показать расписание" }}
-        </button>
-      </div>
       <br />
       <br />
       <h3 class="text-center">
@@ -58,16 +48,13 @@
         {{ get_parity_from_number(selected_parity) }}
       </h3>
       <transition name="fade">
-        <div v-if="has_lessons && show_schedule">
+        <div v-if="has_lessons">
           <!-- TODO подумать, как исправить ref и нужно ли -->
           <schedule-table
             :parity="selected_parity"
             :group="selected_group"
             :lessons="lessons"
           />
-        </div>
-        <div class="text-center" v-else-if="!show_schedule">
-          Расписание скрыто
         </div>
         <div class="text-center" v-else>Расписания нет</div>
       </transition>
@@ -119,7 +106,6 @@ export default {
       lessons: [],
       assignments: [],
       subjects: [],
-      show_schedule: true,
       selected_parity: Parity.NUMERATOR,
       error_message: null,
       Parity: Parity,
@@ -133,9 +119,6 @@ export default {
     }
   },
   methods: {
-    toggle_show_schedule() {
-      this.show_schedule = !this.show_schedule;
-    },
     // TODO подумать, как избежать повторения методов с дочерним компонентов
 
     /**
@@ -159,8 +142,6 @@ export default {
       } catch (err) {
         this.lessons = [];
         this.error_message = String(err);
-      } finally {
-        this.show_schedule = true;
       }
     },
     get_assignments: async function () {
