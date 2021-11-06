@@ -1,5 +1,5 @@
 import config from "../config";
-
+import "../models/schemas.js";
 export { fetch_groups, fetch_schedule, fetch_assignments, fetch_subjects };
 
 function build_url(endpoint, params) {
@@ -18,6 +18,9 @@ const default_headers = {
   accept: "application/json",
 };
 
+/**
+ * @returns {Array<Group>}
+ */
 async function fetch_groups() {
   const response = await fetch(config.base_api_url + config.groups_endpoint, {
     headers: default_headers,
@@ -26,6 +29,9 @@ async function fetch_groups() {
   return data;
 }
 
+/**
+ * @returns {Array<Lesson>}
+ */
 async function fetch_schedule(group, subgroup = 3, parity = 3) {
   const url = new URL(config.base_api_url + config.lessons_endpoint);
   const query = new URLSearchParams({
@@ -44,6 +50,9 @@ async function fetch_schedule(group, subgroup = 3, parity = 3) {
   return data;
 }
 
+/**
+ * @returns {Array<Assignment>}
+ */
 async function fetch_assignments(group) {
   const url = build_url(config.assignments_endpoint, {
     group: group,
@@ -57,7 +66,7 @@ async function fetch_assignments(group) {
  *
  * @param {string} group
  * @param {boolean} with_links_only
- * @returns {Array} list_of_subjects
+ * @returns {Array<Subject>}
  */
 async function fetch_subjects(group, with_links_only = true) {
   const url = build_url(config.subjects_endpoint, {
