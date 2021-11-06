@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import "./models/schemas.js"
 import {
   fetch_groups,
   fetch_schedule,
@@ -99,10 +100,25 @@ export default {
   },
   data() {
     return {
+      /**
+       * @type {Array<Group>}
+       */
       groups: [],
+      /**
+       * @type {?Group}
+       */
       selected_group: null,
+      /**
+       * @type {Array<Lesson>}
+       */
       lessons: [],
+      /**
+       * @type {Array<Assignment>}
+       */
       assignments: [],
+      /**
+       * @type {Array<Subject>}
+       */
       subjects: [],
       selected_parity: Parity.NUMERATOR,
       error_message: null,
