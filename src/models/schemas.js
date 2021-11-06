@@ -1,38 +1,38 @@
 /**
- * @typedef {number} integer
+ * @typedef {Number} Integer
  * 
- * @typedef {object} Assignment
+ * @typedef {Object} Assignment
  * @property {LessonSubject} subject
- * @property {string} complete_before
- * @property {?string} description
- * @property {string} title
- * @property {boolean} is_important
- * @property {boolean} archived
+ * @property {String} complete_before
+ * @property {?String} description
+ * @property {String} title
+ * @property {Boolean} is_important
+ * @property {Boolean} archived
  * @property {Group} group
  * @property {Subgroup} subgroup
- * @property {integer} id
+ * @property {Integer} id
  * 
- * @typedef {object} Body_update_student_assignment_students__student_id__assignments__student_assignment_id__patch
- * @property {boolean} done
+ * @typedef {Object} Body_update_student_assignment_students__student_id__assignments__student_assignment_id__patch
+ * @property {Boolean} done
  * 
- * @typedef {string} Building
+ * @typedef {String} Building
  * Перечисление корпусов университета
  * 
- * @typedef {object} ClassRoom
+ * @typedef {Object} ClassRoom
  * Модель, описывающая аудиторию
- * @property {integer} number - Номер аудитории
+ * @property {Integer} number - Номер аудитории
  * @property {Building} building - Корпус университета, в котором находится аудитория
- * @property {integer} id
+ * @property {Integer} id
  * 
- * @typedef {object} Group
+ * @typedef {Object} Group
  * Модель, описывающая группу
- * @property {string} name - Название группы
- * @property {integer} id
+ * @property {String} name - Название группы
+ * @property {Integer} id
  * 
- * @typedef {object} HTTPValidationError
- * @property {?array} detail
+ * @typedef {Object} HTTPValidationError
+ * @property {?Array<ValidationError>} detail
  * 
- * @typedef {object} Lesson
+ * @typedef {Object} Lesson
  * Модель, описывающая пару
  * @property {LessonSubject} subject - Предмет, по которому проходит пара
  * @property {Teacher} teacher - Преподаватель, который ведет пару
@@ -42,67 +42,67 @@
  * @property {LessonKind} kind - Тип занятия
  * @property {WeekDay} day - День недели, в который проходит пара, в виде перечисления
  * @property {Parity} parity - Четность недели, в которую проходит пара
- * @property {string} time - Время прохождения пары
- * @property {integer} id
+ * @property {String} time - Время прохождения пары
+ * @property {Integer} id
  * 
- * @typedef {string} LessonKind
+ * @typedef {String} LessonKind
  * Перечисление типов пары
  * 
- * @typedef {object} LessonSubject
+ * @typedef {Object} LessonSubject
  * Модель, описывающая предмет
- * @property {string} name - Название предмета
- * @property {integer} id
+ * @property {String} name - Название предмета
+ * @property {Integer} id
  * 
- * @typedef {string} Parity
+ * @typedef {String} Parity
  * Перечисление вариантов четности пары (числитель, знаменатель или всегда)
  * 
- * @typedef {object} Student
- * @property {integer} telegram_id
+ * @typedef {Object} Student
+ * @property {Integer} telegram_id
  * @property {Subgroup} subgroup
  * @property {Group} group
  * 
- * @typedef {object} StudentAssignment
+ * @typedef {Object} StudentAssignment
  * @property {Assignment} assignment
  * @property {Student} student
- * @property {boolean} done
- * @property {integer} id
+ * @property {Boolean} done
+ * @property {Integer} id
  * 
- * @typedef {object} StudentCreate
- * @property {integer} telegram_id
+ * @typedef {Object} StudentCreate
+ * @property {Integer} telegram_id
  * @property {Subgroup} subgroup
- * @property {string} group_name
+ * @property {String} group_name
  * 
- * @typedef {object} StudentUpdate
- * @property {string} group_name
+ * @typedef {Object} StudentUpdate
+ * @property {String} group_name
  * @property {Subgroup} subgroup
  * 
- * @typedef {string} Subgroup
+ * @typedef {String} Subgroup
  * Перечисления подгрупп
  * 
- * @typedef {object} Subject
+ * @typedef {Object} Subject
  * Модель, описывающая предмет
- * @property {string} name - Название предмета
- * @property {integer} id
- * @property {?array} useful_links
+ * @property {String} name - Название предмета
+ * @property {Integer} id
+ * @property {?Array<UsefulLink>} useful_links
  * 
- * @typedef {object} Teacher
+ * @typedef {Object} Teacher
  * Модель, описывающая преподавателя
- * @property {string} first_name - Имя преподавателя
- * @property {string} second_name - Фамилия преподавателя
- * @property {string} middle_name - Отчество преподавателя
- * @property {integer} id
+ * @property {String} first_name - Имя преподавателя
+ * @property {String} second_name - Фамилия преподавателя
+ * @property {String} middle_name - Отчество преподавателя
+ * @property {Integer} id
  * 
- * @typedef {object} UsefulLink
- * @property {string} link
- * @property {?string} description
- * @property {integer} id
+ * @typedef {Object} UsefulLink
+ * @property {String} link
+ * @property {?String} description
+ * @property {Integer} id
  * 
- * @typedef {object} ValidationError
- * @property {array} loc
- * @property {string} msg
- * @property {string} type
+ * @typedef {Object} ValidationError
+ * @property {Array<String>} loc
+ * @property {String} msg
+ * @property {String} type
  * 
- * @typedef {string} WeekDay
+ * @typedef {String} WeekDay
  * Перечисления дней недели
  * 
  */
